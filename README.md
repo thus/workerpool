@@ -10,7 +10,7 @@ Example:
 /* Gets called on worker startup */
 void init_callback(int id, void *user)
 {
-    puts("Initializing worker);
+    puts("Initializing worker");
 }
 
 /* Gets called until the worker is shut down */
