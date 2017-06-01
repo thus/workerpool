@@ -38,8 +38,6 @@ static void *worker_thread(void *user)
     if (wpool->init_callback != NULL)
         wpool->init_callback(wdata->id, wpool->user);
 
-    /* TODO add worker id to callback functions */
-
     while (1)
     {
         if (wpool->flags & WPOOL_FLAG_SHUTDOWN_WORKERS)
