@@ -43,7 +43,8 @@ static void *worker_thread(void *user)
         if (wpool->flags & WPOOL_FLAG_SHUTDOWN_WORKERS)
             break;
 
-        wpool->work_callback(wdata->id, wpool->user);
+        if (wpool->work_callback(wdata->id, wpool->user) != 0)
+            break;
 
         usleep(50000 /* 50ms */);
     }
@@ -89,7 +90,7 @@ static void workerpool_worker_data_free(WorkerPool *wpool)
  */
 WorkerPool *workerpool_init(uint16_t num_workers,
                             void (*init_callback)(int, void *),
-                            void (*work_callback)(int, void *),
+                            int (*work_callback)(int, void *),
                             void (*deinit_callback)(int, void *), void *user)
 {
     if (num_workers == 0 || work_callback == NULL)

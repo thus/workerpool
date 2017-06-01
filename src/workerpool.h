@@ -37,7 +37,7 @@ typedef struct WorkerPool_ {
     volatile uint8_t flags;
 
     void (*init_callback)(int, void *);
-    void (*work_callback)(int, void *);
+    int (*work_callback)(int, void *);
     void (*deinit_callback)(int, void *);
 
     void *user;
@@ -49,7 +49,7 @@ typedef struct WorkerData_ {
 } WorkerData;
 
 WorkerPool *workerpool_init(uint16_t, void (*init_callback)(int, void *),
-                            void (*work_callback)(int, void *),
+                            int (*work_callback)(int, void *),
                             void (*deinit_callback)(int, void *), void *user);
 
 void workerpool_deinit(WorkerPool *);

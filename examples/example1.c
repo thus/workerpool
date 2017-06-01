@@ -24,7 +24,7 @@ void init_cb(int id, void *user)
 
 /* This callback function is called continuously until the worker pool
    is shut down. */ 
-void work_cb(int id, void *user)
+int work_cb(int id, void *user)
 {
     ThreadData *td = (ThreadData *)user;
     int magic_number = td->magic_number[id];
